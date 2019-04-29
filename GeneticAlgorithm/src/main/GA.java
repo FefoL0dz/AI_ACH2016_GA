@@ -19,7 +19,7 @@ public class GA {
         double mutationProbability = 0.15;
         double crossoverProbability = 0.85;
 
-        Handler handler = new Handler(populationSize,endOfTimes,mutationProbability,crossoverProbability);
-        handler.run();
+        /*Handler handler = new Handler(populationSize,endOfTimes,mutationProbability,crossoverProbability);
+        handler.run();*/
     }
 }

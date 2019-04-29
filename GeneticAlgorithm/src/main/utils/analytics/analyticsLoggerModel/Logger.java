@@ -11,20 +11,18 @@ public class Logger {
     private ProblemConfigurationFile  configFile;
     private int executionNumber;
 
-    public Logger() {
-        executionNumber = 1;
+    public Logger(int executionNumber) {
+        this.executionNumber = executionNumber;
 
-        FolderNamesList.updateRootPath(String.valueOf(executionNumber));
+        if (!Folder.isFolderAlreadyCreated(FolderNamesList.ROOT_PATH))
+            Folder.createFolder(FolderNamesList.ROOT_PATH);
 
-        while(Folder.isFolderAlreadyCreated(FolderNamesList.ROOT_PATH)) {
-            executionNumber++;
-            FolderNamesList.updateRootPath(String.valueOf(executionNumber));
-        }
-
-        Folder.createFolder(FolderNamesList.ROOT_PATH);
+        String executionFolder = FolderNamesList.ROOT_PATH + "\\" + this.executionNumber;
+        if (!Folder.isFolderAlreadyCreated(executionFolder))
+            Folder.createFolder(executionFolder);
 
         String extension = FileExtensionsList.TXT;
-        configFile = new ProblemConfigurationFile(FileNamesList.MAIN_LOG, extension);
+        configFile = new ProblemConfigurationFile(executionNumber + "\\" + FileNamesList.MAIN_LOG, extension);
     }
 
     public void log (CurrentInformationData data) {
@@ -32,7 +30,7 @@ public class Logger {
 
         String extension = FileExtensionsList.CSV;
 
-        informationFile = new CurrentInformationFile(infoFileName, extension);
+        informationFile = new CurrentInformationFile(executionNumber + "\\" + infoFileName, extension);
 
         informationFile.setData(data);
 

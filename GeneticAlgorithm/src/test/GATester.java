@@ -80,7 +80,7 @@ public class GATester {
     }
 
     private void initializeHandler() {
-         handler = new Handler(populationSize, endOfTimes, mutationProbability, crossoverProbability);
+         handler = new Handler(1, populationSize, endOfTimes, mutationProbability, crossoverProbability);
     }
 
     private void normalTestGettingBestIndividual() {

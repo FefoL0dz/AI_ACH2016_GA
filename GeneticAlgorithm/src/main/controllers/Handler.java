@@ -38,11 +38,16 @@ public class Handler extends HandlerConfigFile {
 
     private Timer timer;
 
+    private int executionNumber;
+
     public Handler
-    (int populationSize,
+    (int executionNumber,
+     int populationSize,
      int endOfTimes,
      double mutationProbability,
      double crossoverProbability) {
+        this.executionNumber = executionNumber;
+
         timer = new Timer();
         validateInputs(populationSize, endOfTimes, mutationProbability, crossoverProbability);
 
@@ -209,8 +214,9 @@ public class Handler extends HandlerConfigFile {
     }
 
     private void generateLogger() {
-       logger = new Logger();
-       logger.initialLog(generateProblemConfigurationData());
+       logger = new Logger(this.executionNumber);
+        ProblemConfigurationData data = generateProblemConfigurationData();
+       logger.initialLog(data);
     }
     //Log and Data generators
     private void log(){

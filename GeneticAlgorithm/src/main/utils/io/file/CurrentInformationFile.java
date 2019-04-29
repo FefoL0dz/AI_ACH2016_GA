@@ -18,13 +18,14 @@ public class CurrentInformationFile extends File {
     public void createFile() {
         java.io.File log = new java.io.File(this.path);
         try{
+           boolean fileExists = log.exists();
             //TODO: see if i dont need to verify if file already exists
             FileWriter wf = new FileWriter(this.path, true);
             PrintWriter wp = new PrintWriter(wf);
 
-            String splitter = ",";
+            String splitter = ";";
 
-            if(new java.io.File(this.path).exists()) {
+            if(!fileExists) {
                 wp.append(data.getCurrentEpochLabel());
                 wp.append(splitter);
 
